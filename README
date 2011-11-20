@@ -1,0 +1,11 @@
+requirements:
+	software:
+		arduino ide
+		TVout library
+		bitlash
+		PS2Keyboard library
+
+	hardware:
+		arduino mega 1280
+		tv
+		ps2 keyboard
