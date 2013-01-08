@@ -60,8 +60,6 @@ numvar readchar(void) {
                         return keyboard.read();
                 if (Serial.available())
                         return Serial.read();
-                if (Serial1.available())
-                        return Serial1.read();
         }
         
         return -1;
@@ -175,17 +173,15 @@ void sendstr(char *str) {
 
 void sendit(byte c) {
         Serial.print(c, BYTE);
-        Serial1.print(c, BYTE);
         TV.print(c, BYTE);
 }
 
 void setup(void) {
-        TV.begin(NTSC,228,192);
+        TV.begin(NTSC,128,192);
         TV.select_font(font4x6);
         
         setOutputHandler(&sendit);
 
-        Serial1.begin(9600);
 	initBitlash(9600);
 
         addBitlashFunction("pixel", (bitlash_function) pixel);
@@ -204,24 +200,21 @@ void setup(void) {
         if (!SD.begin())
                 sendstr("SD.begin() failed\n");
 
-        keyboard.begin(4, 3);
+        keyboard.begin(4);
 }
 
 void loop(void) {
         if (runf) {
                 while (f.available())
                         doCharacter(f.read());
-                        
+
                 f.close();
-                
+
                 runf = false;
         }
   
         if (keyboard.available())
                 doCharacter(keyboard.read());
-
-        else if (Serial1.available())
-                doCharacter(Serial1.read());
 
 	runBitlash();
 }

@@ -4,8 +4,12 @@ requirements:
 		TVout library
 		bitlash
 		PS2Keyboard library
+		SD library
+			requires slight modification:
+			SD::root should be made public
 
 	hardware:
 		arduino mega 1280
 		tv
 		ps2 keyboard
+		bunch of resistors and sockets (non-random)
